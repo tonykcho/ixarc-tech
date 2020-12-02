@@ -25,5 +25,6 @@ namespace IdentityServerCore.Clients
                 AllowedScopes = { "api1" }
             }
         };
+
     }
 }
