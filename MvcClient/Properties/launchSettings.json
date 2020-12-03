@@ -1,10 +1,10 @@
 ﻿{
   "profiles": {
-    "IdentityServerAPI": {
+    "MvcClient": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000;https://localhost:5001",
+      "applicationUrl": "http://localhost:5010;https://localhost:5011;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -14,7 +14,7 @@ namespace IdentityServerCore.Clients
                 ClientSecrets = { new Secret("secret".Sha256())},
 
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = { "api1" }
+                AllowedScopes = { "api1" },
             },
 
             new Client()
@@ -22,7 +22,12 @@ namespace IdentityServerCore.Clients
                 ClientId = "real_user_client",
                 ClientSecrets = { new Secret("secret".Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
-                AllowedScopes = { "api1" }
+
+                RedirectUris = { "https://localhost:5011/signin-oidc" },
+
+                AllowedScopes = { "api1", "openid", "profile" },
+
+                RequirePkce = false
             }
         };
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IdentityServerCore.Clients;
 using IdentityServerCore.Resources;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,8 +25,11 @@ namespace IdentityServerAPI
 
             ConfigureDatabase(services);
 
+            ConfigureCookies(services);
+
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
+                .AddInMemoryApiScopes(IdentityServerApiScope.DefaultServerApiScopes)
                 .AddInMemoryIdentityResources(IdentityServerResource.DefaultResources)
                 .AddInMemoryApiResources(IdentityServerApiResource.DefaultApiResources)
                 .AddInMemoryClients(IdentityServerClient.DefaultClients);
@@ -39,9 +43,15 @@ namespace IdentityServerAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseIdentityServer();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -54,6 +64,16 @@ namespace IdentityServerAPI
         private void ConfigureDatabase(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>();
+        }
+
+        private void ConfigureCookies(IServiceCollection services)
+        {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddCookie();
         }
     }
 }

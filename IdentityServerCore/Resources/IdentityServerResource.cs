@@ -8,12 +8,14 @@ namespace IdentityServerCore.Resources
     {
         public static readonly IList<IdentityResource> DefaultResources = new List<IdentityResource>
         {
-            new IdentityResource()
-            {
-                Name = "profile",
-                UserClaims = new[] {"name"},
-                DisplayName = "Profile Data",
-            }
+            new IdentityResources.OpenId(),
+            new IdentityResources.Profile()
+            //new IdentityResource()
+            //{
+            //    Name = "profile",
+            //    UserClaims = new[] {"name"},
+            //    DisplayName = "Profile Data",
+            //}
         };
     }
 }

@@ -15,7 +15,7 @@ namespace IdentityServerCore.Resources
             {
                 Name = "test",
                 DisplayName = "Test Api",
-                Scopes = { "test.read", "test.write" },
+                Scopes = { "test.read", "test.write", "api1" },
             }
         };
     }
